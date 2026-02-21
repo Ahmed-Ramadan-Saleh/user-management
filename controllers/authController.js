@@ -78,9 +78,6 @@ const post_login = async (req, res) => {
 };
 
 const post_update_profile = (req, res, next) => {
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
-
   cloudinary.uploader.upload(
     req.file.path,
     { folder: "management/Userimage" },
@@ -90,11 +87,11 @@ const post_update_profile = (req, res, next) => {
 
         const avatar = await AuthUser.updateOne(
           { _id: decoded.id },
-          { profileimage: result.secure_url }
+          { profileimage: result.secure_url },
         );
         res.redirect("/home");
       }
-    }
+    },
   );
 };
 

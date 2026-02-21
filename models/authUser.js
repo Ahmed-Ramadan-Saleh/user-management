@@ -31,14 +31,6 @@ authUserSchema.pre("save", async function (next) {
   next();
 });
 
-// authUserSchema.pre("save", async function (next) {
-//   const salt = await bcrypt.genSalt();
-//   this.password = await bcrypt.hash(this.password, salt);
-//   next();
-//  });
-
-// Create a model based on that schema
 const AuthUser = mongoose.model("User", authUserSchema);
 
-// export the model
 module.exports = AuthUser;

@@ -36,7 +36,7 @@ const user_post = async (req, res) => {
           createdAt: new Date(),
         },
       },
-    }
+    },
   )
     .then((result) => {
       res.redirect("/home");
@@ -53,7 +53,7 @@ const user_delete = (req, res) => {
 
   AuthUser.updateOne(
     { "customerinfo._id": req.params.id },
-    { $pull: { customerinfo: { _id: req.params.id } } }
+    { $pull: { customerinfo: { _id: req.params.id } } },
   )
     .then((result) => {
       res.redirect("/home");
@@ -112,7 +112,7 @@ const user_put = (req, res) => {
       "customerinfo.$.country": req.body.country,
       "customerinfo.$.gender": req.body.gender,
       "customerinfo.$.updatedAt": new Date(),
-    }
+    },
   )
     .then((result) => {
       res.redirect("/home");
