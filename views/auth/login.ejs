@@ -14,94 +14,200 @@
       content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
     <meta name="generator" content="Hugo 0.112.5" />
-    <title>Home page</title>
+    <title>Login - UM System</title>
 
     <link href="./css/bootstrap.min.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="./css/dark-light.css" />
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="./css/sidebars.css" rel="stylesheet" />
     <link rel="stylesheet" href="./css/myStyle.css" />
+    
     <style>
-      /* Custom default button */
-      .btn-light,
-      .btn-light:hover,
-      .btn-light:focus {
-        color: #333;
-        text-shadow: none; /* Prevent inheritance from `body` */
+      :root {
+        --brand-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --btn-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        --input-bg: rgba(15, 23, 42, 0.6);
+        --input-border: #334155;
+        --input-focus-border: #4f46e5;
       }
 
-      /*
- * Base structure
- */
-
+      /* Base Structure */
       body {
-        text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
-        box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #f1f5f9;
+        min-height: 100vh;
+        /* Remove old heavy shadows */
+        text-shadow: none;
+        box-shadow: none;
       }
 
       .cover-container {
         max-width: 42em;
       }
+
+      /* 1. Login Card (Glassmorphism) */
+      .login-card {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        max-width: 28rem; /* Slightly wider form */
+        margin: 0 auto;
+      }
+
+      /* 2. Typography */
+      h1 {
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+        background: var(--brand-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .subtitle {
+        color: #94a3b8;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+      }
+
+      /* 3. Form Controls */
+      .form-label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #cbd5e1;
+        margin-bottom: 0.5rem;
+      }
+
+      .form-control {
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: #fff;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .form-control:focus {
+        background-color: rgba(15, 23, 42, 0.8);
+        border-color: var(--input-focus-border);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        color: #fff;
+      }
+
+      .form-control::placeholder {
+        color: #64748b;
+      }
+
+      /* 4. Checkbox */
+      .form-check-input {
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+      }
+      .form-check-input:checked {
+        background-color: #4f46e5;
+        border-color: #4f46e5;
+      }
+
+      /* 5. Buttons */
+      .btn-login {
+        background: var(--btn-gradient);
+        border: none;
+        color: white;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        border-radius: 10px;
+        width: 100%;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+      }
+
+      .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.45);
+        filter: brightness(1.1);
+      }
+
+      /* 6. Error Messages */
+      #emailError, #passwordError {
+        color: #f87171; /* Red 400 */
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+      }
+
+      /* Footer adjustment */
+      footer {
+        opacity: 0.6;
+        font-size: 0.85rem;
+      }
     </style>
   </head>
-  <body class="d-flex h-100 text-center text-bg-dark">
+  <body class="d-flex h-100 text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <%- include('./header.ejs', {currentPage : "login"}) %>
 
-      <main class="px-3">
-        <h1>Log in</h1>
+      <main class="px-3 my-auto py-4">
+        <div class="login-card">
+          <h1>Welcome back</h1>
+          <p class="subtitle">Please enter your credentials to log in.</p>
 
-        <form
-  
-        id="signupForm"
-          class="text-start mx-auto mt-5"
-          style="max-width: 22em"
-        >
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label"
-              >Email address</label
-            >
-            <input
-              name="email"
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-            <p id="emailError"></p>
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label"
-              >Password</label
-            >
-            <input
-              name="password"
-              type="text"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
-            <p id="passwordError"></p>
-          </div>
-          <div class="mb-3 form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="exampleCheck1"
-            />
-            <label class="form-check-label" for="exampleCheck1"
-              >Check me out</label
-            >
-          </div>
-          <button type="submit" class="btn btn-primary">Log in</button>
-        </form>
+          <form id="signupForm" class="text-start">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input
+                name="email"
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="name@example.com"
+              />
+              <p id="emailError"></p>
+            </div>
+            
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input
+                name="password"
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                placeholder="••••••••"
+              />
+              <p id="passwordError"></p>
+            </div>
+            
+            <div class="mb-4 form-check d-flex justify-content-between align-items-center">
+              <div>
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                <label class="form-check-label small" for="exampleCheck1">Remember me</label>
+              </div>
+              <!-- Optional: Add forgot password link -->
+              <a href="#" class="small text-decoration-none" style="color: #94a3b8;">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="btn btn-login">Log in</button>
+          </form>
+        </div>
       </main>
 
-      <footer class="mt-auto text-white-50">
+      <footer class="mt-auto text-white-50 py-3">
         <p>Designed and developed by Ahmed Ramadan © 2024</p>
       </footer>
     </div>
+
     <script>
       signupForm.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -111,7 +217,6 @@
         const res = await fetch("/login", {
           method: "POST",
           body: JSON.stringify({
-         
             email: exampleInputEmail1.value,
             password: exampleInputPassword1.value,
           }),
@@ -119,24 +224,19 @@
         });
 
         const data = await res.json();
-       
 
         if (data.notFoundEmail) {
           emailError.textContent = data.notFoundEmail;
         }
 
-
         if (data.id) {
           location.assign("/home")
         }
-
 
         if (data.passwordError) {
           console.log(data)
           passwordError.textContent = data.passwordError;
         }
-
-       
       });
     </script>
     <script src="./js/bootstrap.bundle.min.js"></script>

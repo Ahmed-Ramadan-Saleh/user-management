@@ -1,105 +1,242 @@
+<!-- Custom CSS for Professional Look -->
+<style>
+  /* 1. Sidebar Container: Dark Slate Theme */
+  .custom-sidebar {
+    width: 280px;
+    min-height: 100vh;
+    background-color: #0f172a; /* Deep Dark Blue */
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+  }
+
+  /* 2. Brand Logo */
+  .sidebar-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .sidebar-brand i {
+    color: #4facfe; /* Accent color */
+  }
+
+  /* 3. Navigation Links */
+  .sidebar-nav .nav-link {
+    color: #94a3b8;
+    padding: 0.75rem 1rem;
+    margin: 0.2rem 0;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s;
+  }
+
+  .sidebar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+  }
+
+  /* Active State: Gradient background + Left Border */
+  .sidebar-nav .nav-link.active {
+    background: linear-gradient(90deg, rgba(79, 70, 229, 0.2) 0%, transparent 100%);
+    color: #fff;
+    font-weight: 600;
+    border-left: 4px solid #4f46e5;
+  }
+
+  /* 4. Profile Footer */
+  .sidebar-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+  }
+  
+  .profile-avatar {
+    border: 2px solid #334155;
+    object-fit: cover;
+  }
+
+  /* 5. Dark Dropdown Menu */
+  .dropdown-menu-dark.custom-dropdown {
+    background-color: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border-radius: 12px;
+  }
+
+  /* 6. Modal Dark Theme */
+  .modal-content.dark-modal {
+    background-color: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    color: #f1f5f9;
+  }
+  
+  .dark-modal .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+  }
+
+  /* 7. Upload Image Preview */
+  .upload-preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  @media (min-width: 576px) {
+    .upload-preview-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+  }
+  
+  .preview-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #334155;
+  }
+</style>
+
+
+<!-- Sidebar Component -->
 <div
-        id="sidebarId"
-        class="position-relative d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar"
+  id="sidebarId"
+  class="custom-sidebar d-flex flex-column flex-shrink-0 p-3 position-relative"
+>
+  <!-- Close Button -->
+  <span class="position-absolute" style="right: 15px; top: 15px;">
+    <button class="btn p-0 text-muted" onclick="toggleSidebar()" title="Close Sidebar">
+      <i class="bi bi-x-lg fs-5"></i>
+    </button>
+  </span>
+
+  <!-- Sidebar Header -->
+<div style="height: 50px;"></div>
+  
+  <hr class="my-2 border-secondary" />
+
+  <!-- Navigation -->
+  <ul class="nav nav-pills flex-column mb-auto sidebar-nav mt-2">
+    <li class="nav-item">
+      <a href="/home" class="nav-link <%= currentPage === 'index' ? 'active' : '' %>" aria-current="page">
+        <i class="bi bi-house-door-fill"></i>
+        <span class="sidebar-text">Home</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="../user/add.html" class="nav-link <%= currentPage === 'add' ? 'active' : '' %>">
+        <i class="bi bi-person-plus-fill"></i>
+        <span class="sidebar-text">Add User</span>
+      </a>
+    </li>
+  </ul>
+
+  <!-- User Profile Footer -->
+  <div class="sidebar-footer mt-auto">
+    <div class="dropdown dropup">
+      <a
+        href="#"
+        class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
       >
-        <span style="right: 10px; top: 2px" class="position-absolute">
-          <button class="btn" onclick="toggleSidebar()">
-            <i  class="bi bi-x-circle"></i>
-          </button>
-        </span>
-
-        <a
-          href="/"
-          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
-        >
-          <i class="bi bi-lightning-charge"></i>
-          <span class="fs-4 sidebar-text">Welcome</span>
-        </a>
-        <hr />
-        <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item">
-            <a href="/home" class="nav-link  text-white <%= currentPage === "index" ? "active" : null %> " aria-current="page">
-              <svg class="bi pe-none me-2" width="16" height="16">
-                <use xlink:href="#home" />
-              </svg>
-              <span class="sidebar-text"> Home </span>
-            </a>
-          </li>
-
-          <li>
-            <a href="../user/add.html" class="nav-link text-white <%= currentPage === "add" ? "active" : null %> ">
-              <svg class="bi pe-none me-2" width="16" height="16">
-                <use xlink:href="#people-circle" />
-              </svg>
-              <span class="sidebar-text"> Add User </span>
-            </a>
-          </li>
-        </ul>
-        <hr />
-        <div class="dropdown">
-          <a
-            href="#"
-            class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
+        <img
+          src="<%= user.profileimage ? user.profileimage : '../img/User_Avatar.png' %>"
+          alt="User Avatar"
+          width="36"
+          height="36"
+          class="rounded-circle me-2 profile-avatar"
+        />
+        <strong class="sidebar-text"><%= user.username %></strong>
+      </a>
+      
+      <!-- Dropdown Menu -->
+      <ul class="dropdown-menu dropdown-menu-dark custom-dropdown text-small shadow w-100">
+        <li>
+          <button 
+            class="dropdown-item d-flex align-items-center gap-2" 
+            href="#"  
+            data-bs-toggle="modal" 
+            data-bs-target="#exampleModal"
           >
-            <img
-            
-            src="<%= user.profileimage ? user.profileimage:"../img/User_Avatar.png" %>"
-              alt=""
-              width="32"
-              height="32"
-              class="rounded-circle me-2"
-            />
-            <strong class="sidebar-text">
-              <%= user.username %>
-            </strong>
+            <i class="bi bi-camera-fill"></i> Change Photo
+          </button>
+        </li>
+        <li><hr class="dropdown-divider border-secondary" /></li>
+        <li>
+          <a class="dropdown-item d-flex align-items-center gap-2 text-danger" href="/signout">
+            <i class="bi bi-box-arrow-left"></i> Sign out
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li>
-              <button 
-              class="dropdown-item" 
-              href="#"  
-              data-bs-toggle="modal" 
-              data-bs-target="#exampleModal">Profile image
-              </button>
-            </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="/signout">Sign out</a></li>
-          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-        </div>
-      </div>
-<!-- Modal -->
-<div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <form action="/update-profile" method="post" enctype="multipart/form-data"
-    class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Change Profile image</h1>
+<!-- Modal Component -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form action="/update-profile" method="post" enctype="multipart/form-data" class="modal-content dark-modal">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold" id="exampleModalLabel">
+          Change Profile Image
+        </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-
-      <div class="px-4 modal-body d-flex justify-content-between align-items-center">
-        <label class="btn btn-secondary" for="inputFile">+ Upload image</label>
-        <input name="avatar" style="display: none;" id="inputFile" type="file">
-        <img id="IMGELEMENT" style="border-radius: 50%;"   src="<%= user.profileimage ? user.profileimage:"../img/User_Avatar.png" %>"  alt="" width="150" height="150">
+      <div class="modal-body">
+        <div class="upload-preview-container text-center text-sm-start">
+          <div>
+            <label class="btn btn-outline-primary rounded-pill px-4 mb-0" for="inputFile">
+              <i class="bi bi-upload me-2"></i> Upload New
+            </label>
+            <input name="avatar" style="display: none;" id="inputFile" type="file" accept="image/*">
+            <p class="text-muted small mt-2 mb-0">JPG, PNG or GIF</p>
+          </div>
+          <img id="IMGELEMENT" class="preview-image" src="<%= user.profileimage ? user.profileimage : '../img/User_Avatar.png' %>" alt="Preview">
+        </div>
       </div>
 
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary rounded-pill px-4">Save Changes</button>
       </div>
     </form>
-    action="/profile" method="post" enctype="multipart/form-data"
-
   </div>
 </div>
-      <div class="b-example-divider b-example-vr"></div>
-      <script>
-        inputFile.addEventListener("change", (eo) => {
-        IMGELEMENT.src = URL.createObjectURL(eo.target.files[0])
-        })
-      </script>
+
+<!-- Divider (Optional) -->
+<div class="b-example-divider b-example-vr" style="background-color: transparent;"></div>
+
+<script>
+  // Preview Image Script
+  inputFile.addEventListener("change", (eo) => {
+    if (eo.target.files && eo.target.files[0]) {
+        IMGELEMENT.src = URL.createObjectURL(eo.target.files[0]);
+    }
+  });
+  
+  // Toggle Sidebar Script (Ensure this function exists in your global JS or here)
+
+  function toggleSidebar() {
+    const sidebar = document.getElementById("sidebarId");
+    // نبحث عن زر القائمة في الـ Navbar (أعطه id="menuBtn" في الـ HTML)
+    const menuBtn = document.getElementById("menuBtn"); 
+
+    if (sidebar) {
+      sidebar.classList.toggle("d-none");
+      
+      // إذا كان الـ sidebar مخفياً، أظهر الزر في الـ Navbar
+      if (sidebar.classList.contains("d-none")) {
+          if(menuBtn) menuBtn.classList.remove('d-none');
+      } else {
+          // إذا كان الـ sidebar ظاهراً، أخفِ الزر من الـ Navbar
+          if(menuBtn) menuBtn.classList.add('d-none');
+      }
+    }
+  }
+
+</script>

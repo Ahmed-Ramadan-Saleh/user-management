@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="auto">
+<html lang="en" data-bs-theme="dark">
   <head>
     <script src="./js/color-modes.js"></script>
     <link
@@ -14,15 +14,144 @@
       content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
     <meta name="generator" content="Hugo 0.112.5" />
-    <title>Home page</title>
+    <title>Dashboard | UM System</title>
 
     <link href="./css/bootstrap.min.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="./css/dark-light.css" />
-
-    <!-- Custom styles for this template -->
     <link href="./css/sidebars.css" rel="stylesheet" />
     <link rel="stylesheet" href="./css/myStyle.css" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        --card-bg: rgba(30, 41, 59, 0.6);
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-muted: #64748b;
+        --accent-color: #4f46e5;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-gradient);
+        color: #e2e8f0;
+        min-height: 100vh;
+      }
+
+      /* 1. Layout Structure */
+      main.d-flex {
+        min-height: 100vh;
+        width: 100%;
+      }
+
+      /* The main content section */
+      .main-content-section {
+        flex-grow: 1;
+        overflow-y: auto; /* Scroll independently */
+        height: 100vh;
+        padding-bottom: 2rem;
+      }
+
+      /* 2. Empty State Styling */
+      .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 60vh;
+        color: #64748b;
+      }
+      .empty-state i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+      }
+
+      /* 3. Table Card Container */
+      .table-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      }
+
+      /* 4. Table Styling */
+      .custom-table {
+        color: #fff;
+        margin-bottom: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      .custom-table thead th {
+        background-color: rgba(15, 23, 42, 0.4);
+        border-bottom: 2px solid var(--accent-color);
+        color: #94a3b8;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        padding: 1rem;
+        white-space: nowrap;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .custom-table tbody td {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 1rem;
+        vertical-align: middle;
+        font-size: 0.95rem;
+        background-color: rgba(255, 255, 255, 0.03);
+      }
+
+      .custom-table tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.068);
+      }
+      
+
+      /* 5. Action Buttons */
+      .action-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0 2px;
+        transition: all 0.2s;
+        border: 1px solid transparent;
+      }
+
+      .btn-view { background: rgba(59, 130, 246, 0.1); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2); }
+      .btn-view:hover { background: #3b82f6; color: white; }
+
+      .btn-edit { background: rgba(245, 158, 11, 0.1); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.2); }
+      .btn-edit:hover { background: #f59e0b; color: white; }
+
+      .btn-delete { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
+      .btn-delete:hover { background: #ef4444; color: white; }
+
+      /* 6. Responsive Scroll wrapper */
+      .table-responsive {
+        border-radius: 12px;
+        overflow-x: auto;
+      }
+
+
+
+      
+    </style>
   </head>
   <body>
     <%- include('./Components/dark-light.ejs') %>
@@ -30,36 +159,40 @@
     <main class="d-flex flex-nowrap">
       <%- include('./Components/sidebar.ejs', {currentPage: "index"}) %>
 
-      <section class="w-100">
+      <section class="main-content-section w-100 px-4">
         <%- include('./Components/navbar.ejs') %>
 
         <% if (arr.length === 0) { %>
-        <h1 style="text-align: center; margin-top: 4rem;">No data available</h1>
+          <!-- Professional Empty State -->
+          <div class="empty-state">
+            <i class="bi bi-inbox-fill"></i>
+            <h3 class="fs-4 fw-semibold">No Data Available</h3>
+            <p class="text-muted">Start by adding a new user to the system.</p>
+            <a href="/user/add" class="btn btn-primary btn-sm mt-2 px-4" style="background: var(--accent-color); border:none;">
+              <i class="bi bi-plus-lg me-2"></i>Add User
+            </a>
+          </div>
         <% } %>
 
-
-
         <% if (arr.length > 0) { %>
-          <table
-          style="width: 99%"
-          class="text-center mx-auto table mt-5 table-striped table-bordered"
-        >
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Country</th>
-              <th scope="col">Age</th>
-              <th scope="col">Last updated</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="table custom-table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Last Updated</th>
+                    <th scope="col" class="text-center">Action</th>
+                  </tr>
+                </thead>
           <tbody>
             <% arr.forEach((item, index) => { %>
-            <tr>
-              <th scope="row"><%= index +1 %></th>
+            <tr >
+              <td scope="row"><%= index +1 %></td>
               <td><%= item.fireName %> <%= item.lastName %></td>
               <td><%= item.gender %></td>
               <td><%= item.country %></td>
@@ -70,7 +203,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-title="View details"
                   data-bs-placement="top"
-                  class="btn btn-primary btn-sm"
+                  class="btn action-btn btn-view"
                   href="/view/<%= item._id %>"
                   ><i class="bi bi-eye"></i
                 ></a>
@@ -79,7 +212,7 @@
                   data-bs-toggle="tooltip"
                   data-bs-title="Edit user"
                   data-bs-placement="top"
-                  class="btn btn-primary btn-sm"
+                  class="btn action-btn btn-edit"
                   href="./edit/<%= item._id %>"
                 >
                   <i class="bi bi-pencil"></i>
@@ -93,7 +226,7 @@
                     data-bs-toggle="tooltip"
                     data-bs-title="Delete user"
                     data-bs-placement="top"
-                    class="btn btn-danger btn-sm"
+                    class="btn action-btn btn-delete"
                   >
                     <i class="bi bi-trash"></i>
                   </button>
@@ -102,17 +235,21 @@
             </tr>
             <% }) %>
           </tbody>
-        </table>
+              </table>
+            </div>
+          </div>
         <% } %>
-
-
-      
       </section>
     </main>
+
     <script src="./js/bootstrap.bundle.min.js"></script>
-
     <script src="./js/sidebars.js"></script>
-
     <script src="./js/main.js"></script>
+
+    <!-- Initialize Tooltips -->
+    <script>
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
   </body>
 </html>

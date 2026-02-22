@@ -3,7 +3,6 @@ const AuthUser = require("../models/authUser");
 var jwt = require("jsonwebtoken");
 
 // /home
-//done
 const user_index_get = (req, res) => {
   var decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET_KEY);
 
@@ -17,7 +16,6 @@ const user_index_get = (req, res) => {
 };
 
 // add new User
-//done
 const user_post = async (req, res) => {
   var decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET_KEY);
   console.log(req.body);
@@ -47,7 +45,6 @@ const user_post = async (req, res) => {
 };
 
 //delete exist object
-//done
 const user_delete = (req, res) => {
   var decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET_KEY);
 
@@ -65,7 +62,6 @@ const user_delete = (req, res) => {
 };
 
 //view:id
-//done
 const user_view_get = (req, res) => {
   var decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET_KEY);
   //decoded.id
@@ -83,8 +79,6 @@ const user_view_get = (req, res) => {
 };
 
 //edit:id
-//done
-
 const user_edit_get = (req, res) => {
   AuthUser.findOne({ "customerinfo._id": req.params.id })
     .then((result) => {
@@ -99,7 +93,6 @@ const user_edit_get = (req, res) => {
     });
 };
 //update:id
-//done
 const user_put = (req, res) => {
   AuthUser.updateOne(
     { "customerinfo._id": req.params.id },
@@ -126,7 +119,6 @@ const user_add_get = (req, res) => {
   res.render("user/add");
 };
 //search:id
-
 const user_search_post = async (req, res) => {
   const searchText = req.body.searchText.trim();
 

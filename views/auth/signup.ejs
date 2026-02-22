@@ -14,119 +14,231 @@
       content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
     <meta name="generator" content="Hugo 0.112.5" />
-    <title>Home page</title>
+    <title>Sign Up - UM System</title>
 
     <link href="./css/bootstrap.min.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="./css/dark-light.css" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="./css/sidebars.css" rel="stylesheet" />
     <link rel="stylesheet" href="./css/myStyle.css" />
+    
     <style>
-      /* Custom default button */
-      .btn-light,
-      .btn-light:hover,
-      .btn-light:focus {
-        color: #333;
-        text-shadow: none; /* Prevent inheritance from `body` */
+      :root {
+        --brand-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --btn-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        --input-bg: rgba(15, 23, 42, 0.6);
+        --input-border: #334155;
+        --input-focus-border: #4f46e5;
       }
 
-      /*
- * Base structure
- */
-
+      /* Base Structure */
       body {
-        text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
-        box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #f1f5f9;
+        min-height: 100vh;
+        text-shadow: none;
+        box-shadow: none;
       }
 
       .cover-container {
         max-width: 42em;
       }
 
-    
+      /* 1. Auth Card (Glassmorphism) */
+      .auth-card {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        max-width: 28rem;
+        margin: 0 auto;
+      }
 
+      /* 2. Typography */
+      h1 {
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+        background: var(--brand-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .subtitle {
+        color: #94a3b8;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+      }
+
+      /* 3. Form Controls */
+      .form-label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #cbd5e1;
+        margin-bottom: 0.5rem;
+      }
+
+      .form-control {
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: #fff;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .form-control:focus {
+        background-color: rgba(15, 23, 42, 0.8);
+        border-color: var(--input-focus-border);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        color: #fff;
+      }
+
+      .form-control::placeholder {
+        color: #64748b;
+      }
+
+      /* 4. Checkbox */
+      .form-check-input {
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+      }
+      .form-check-input:checked {
+        background-color: #4f46e5;
+        border-color: #4f46e5;
+      }
+      .form-check-label {
+          color: #94a3b8;
+          font-size: 0.9rem;
+      }
+
+      /* 5. Buttons */
+      .btn-signup {
+        background: var(--btn-gradient);
+        border: none;
+        color: white;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        border-radius: 10px;
+        width: 100%;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+      }
+
+      .btn-signup:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.45);
+        filter: brightness(1.1);
+        color: white;
+      }
+
+      /* 6. Error Messages */
+      #emailError, #passwordError {
+        color: #f87171; /* Red 400 */
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+      }
+
+      /* Footer */
+      footer {
+        opacity: 0.6;
+        font-size: 0.85rem;
+      }
     </style>
   </head>
-  <body class="d-flex h-100 text-center text-bg-dark">
+  <body class="d-flex h-100 text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <%- include('./header.ejs', {currentPage: "signup"}) %>
 
-      <main class="px-3">
-        <h1>Sign up</h1>
+      <main class="px-3 my-auto py-4">
+        <div class="auth-card">
+          <h1>Create Account</h1>
+          <p class="subtitle">Join the UM System today.</p>
 
-        <form
-          id="signupForm"
-          action="/signup"
-          method="post"
-          class="text-start mx-auto mt-5"
-          style="max-width: 22em"
-        >
-          <div class="mb-3">
-            <label for="exampleInputUsername" class="form-label"
-              >Username :</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="exampleInputUsername"
-              name="username"
-            />
-          </div>
+          <form
+            id="signupForm"
+            action="/signup"
+            method="post"
+            class="text-start"
+          >
+            <div class="mb-3">
+              <label for="exampleInputUsername" class="form-label">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputUsername"
+                name="username"
+                placeholder="johndoe"
+                required
+              />
+            </div>
 
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label"
-              >Email address :
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="exampleInputEmail1"
-              name="email"
-            />
-            <p id="emailError"></p>
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label"
-              >Password :
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="exampleInputPassword1"
-              name="password"
-            />
-            <p id="passwordError"></p>
-          </div>
-          <div class="mb-3 form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="exampleCheck1"
-            />
-            <label class="form-check-label" for="exampleCheck1"
-              >Check me out</label
-            >
-          </div>
-          <button type="submit" class="btn btn-primary">Sign up</button>
-        </form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                name="email"
+                placeholder="name@example.com"
+                required
+              />
+              <p id="emailError"></p>
+            </div>
+            
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <!-- Changed type to "password" for security -->
+              <input
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                name="password"
+                placeholder="••••••••"
+                required
+              />
+              <p id="passwordError"></p>
+            </div>
+            
+            <div class="mb-4 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+                required
+              />
+              <label class="form-check-label" for="exampleCheck1">
+                I agree to the Terms and Conditions
+              </label>
+            </div>
+            
+            <button type="submit" class="btn btn-signup">Sign up</button>
+          </form>
+        </div>
       </main>
 
-      <footer class="mt-auto text-white-50">
+      <footer class="mt-auto text-white-50 py-3">
         <p>Designed and developed by Ahmed Ramadan © 2024</p>
       </footer>
     </div>
+    
     <script>
-
-
-
-
-
       signupForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        emailError.textContent = ""
-        passwordError.textContent = ""
+        emailError.textContent = "";
+        passwordError.textContent = "";
 
         const res = await fetch("/signup", {
           method: "POST",
@@ -140,40 +252,29 @@
 
         const data = await res.json();
 
-
         if (data.arrValidationError) {
-          console.log(data.arrValidationError)
+          console.log(data.arrValidationError);
 
           data.arrValidationError.forEach(item => {
-
             if (item.path == "email") {
-              emailError.textContent = "please provide a valid email"
+              emailError.textContent = "Please provide a valid email.";
             }
-
 
             if (item.path == "password") {
-              passwordError.textContent = "Password must be at least 8 characters with 1 upper case letter and 1 number"
+              passwordError.textContent = "Password must be at least 8 characters with 1 upper case letter and 1 number.";
             }
-            
           });
         }
 
-
-        
-
         if (data.existEmail) {
-          console.log(data.existEmail)
-          emailError.textContent = "Email already exist, Try to login"
+          console.log(data.existEmail);
+          emailError.textContent = "Email already exists. Try to login.";
         }
 
-
-        
         if (data.id) {
-          console.log(data.id)
-          location.assign("/home")
+          console.log(data.id);
+          location.assign("/home");
         }
-          
-        
       });
     </script>
     <script src="./js/bootstrap.bundle.min.js"></script>

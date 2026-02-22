@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="auto">
+<html lang="en" data-bs-theme="dark">
   <head>
     <script src="../js/color-modes.js"></script>
     <link
@@ -15,16 +15,148 @@
       content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
     <meta name="generator" content="Hugo 0.112.5" />
-    <title>Edit page</title>
+    <title>User Profile | UM System</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="../css/dark-light.css">
-
-
-    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../css/dark-light.css" />
     <link href="../css/sidebars.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/myStyle.css" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        --card-bg: rgba(30, 41, 59, 0.7);
+        --border-color: rgba(255, 255, 255, 0.1);
+        --input-bg: rgba(15, 23, 42, 0.6);
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-gradient);
+        color: #e2e8f0;
+        min-height: 100vh;
+      }
+
+      /* 1. Layout */
+      main.d-flex {
+        min-height: 100vh;
+        width: 100%;
+      }
+
+      .main-content-section {
+        flex-grow: 1;
+        overflow-y: auto;
+        height: 100vh;
+        padding-bottom: 3rem;
+      }
+
+      /* 2. Profile Card */
+      .profile-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 0;
+        margin-top: 2rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden; /* For header background */
+      }
+
+      /* 3. Card Header */
+      .profile-header {
+        background: linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(124, 58, 237, 0.1) 100%);
+        padding: 2rem;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .profile-title {
+        margin-bottom: 0.25rem;
+        font-weight: 700;
+        font-size: 1.75rem;
+        color: #fff;
+      }
+
+      .profile-subtitle {
+        color: #94a3b8;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .id-badge {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-family: monospace;
+        color: #cbd5e1;
+      }
+
+      /* 4. Card Body */
+      .profile-body {
+        padding: 2rem;
+      }
+
+      .detail-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .detail-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      
+      .detail-label i {
+          font-size: 0.9rem;
+          color: #4f46e5; /* Accent color for icons */
+      }
+
+      .detail-value {
+        font-size: 1.1rem;
+        color: #f1f5f9;
+        font-weight: 500;
+        padding-left: 1.35rem; /* Align with label text */
+      }
+      
+      /* Divider line between sections */
+      .section-divider {
+          border-top: 1px solid rgba(255,255,255,0.05);
+          margin: 2rem 0;
+      }
+
+      /* 5. Breadcrumb */
+      .breadcrumb {
+          margin-bottom: 0;
+          background: transparent;
+          padding: 0;
+      }
+      .breadcrumb-item a { color: #94a3b8; text-decoration: none; }
+      .breadcrumb-item.active { color: #fff; }
+      .breadcrumb-item + .breadcrumb-item::before { content: "/"; color: #475569; }
+
+    </style>
   </head>
   <body>
     <%- include('../Components/dark-light.ejs') %>
@@ -32,83 +164,93 @@
     <main class="d-flex flex-nowrap">
       <%- include('../Components/sidebar.ejs', {currentPage: "view"}) %>
 
-
-      <section class="w-100">
+      <section class="main-content-section w-100 px-4">
         <%- include('../Components/navbar.ejs') %>
 
-        <nav
-          style="width: 88%"
-          class="px-2 mt-4 d-flex flex-wrap justify-content-between"
-          aria-label="breadcrumb"
-        >
+        <!-- Breadcrumb Navigation -->
+        <nav class="mt-4 d-flex flex-wrap justify-content-between align-items-center" aria-label="breadcrumb" style="max-width: 900px; margin-left: auto; margin-right: auto;">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+            <li class="breadcrumb-item"><a href="/home"><i class="bi bi-house-door me-1"></i>Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">
-              <%= obj.fireName %> <%= obj.lastName %>
+              User Profile
             </li>
           </ol>
-
-          <p class=" ">
-            <span class="fw-medium fs-6">Id :</span> <%= obj._id %>
-          </p>
         </nav>
 
-        <table
-          style="width: 88%"
-          class="ms-1 table mt-5 table-striped table-bordered"
-        >
-          <thead>
-            <tr>
-              <th scope="col">First Name</th>
-              <th class="fw-normal" scope="col"> <%= obj.fireName %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Last Name</th>
-              <td><%= obj.lastName %></td>
-            </tr>
+        <div class="profile-card">
+          <!-- Card Header -->
+          <div class="profile-header">
+            <div>
+              <h1 class="profile-title"><%= obj.fireName %> <%= obj.lastName %></h1>
+              <div class="profile-subtitle">
+                <i class="bi bi-person-circle"></i> <%= obj.gender %> • <%= obj.country %>
+              </div>
+            </div>
+            <div class="id-badge">
+              ID: <%= obj._id %>
+            </div>
+          </div>
 
-            <tr>
-              <th scope="row">Telephone</th>
-              <td><%= obj.phoneNumber %></td>
-            </tr>
+          <!-- Card Body -->
+          <div class="profile-body">
+            
+            <div class="row">
+              <!-- Left Column: Personal Details -->
+              <div class="col-md-6">
+                <div class="detail-group">
+                  <div class="detail-label"><i class="bi bi-person"></i> First Name</div>
+                  <div class="detail-value"><%= obj.fireName %></div>
+                </div>
+                
+                <div class="detail-group">
+                  <div class="detail-label"><i class="bi bi-person"></i> Last Name</div>
+                  <div class="detail-value"><%= obj.lastName %></div>
+                </div>
 
-            <tr>
-              <th scope="row">Email</th>
-              <td><%= obj.email %></td>
-            </tr>
+                <div class="detail-group">
+                  <div class="detail-label"><i class="bi bi-calendar-event"></i> Age</div>
+                  <div class="detail-value"><%= obj.age %> years old</div>
+                </div>
+              </div>
 
-            <tr>
-              <th scope="row">Gender</th>
-              <td><%= obj.gender %></td>
-            </tr>
+              <!-- Right Column: Contact & Meta -->
+              <div class="col-md-6">
+                <div class="detail-group">
+                  <div class="detail-label"><i class="bi bi-envelope"></i> Email Address</div>
+                  <div class="detail-value"><%= obj.email %></div>
+                </div>
 
-            <tr>
-              <th scope="row">Age</th>
-              <td><%= obj.age %></td>
-            </tr>
+                <div class="detail-group">
+                  <div class="detail-label"><i class="bi bi-telephone"></i> Phone Number</div>
+                  <div class="detail-value"><%= obj.phoneNumber %></div>
+                </div>
+              </div>
+            </div>
 
-            <tr>
-              <th scope="row">Country</th>
-              <td><%= obj.country %></td>
-            </tr>
+            <div class="section-divider"></div>
 
-            <tr>
-              <th scope="row">Created on</th>
-              <td><%= moment(obj.createdAt).fromNow();  %></td>
-            </tr>
+            <!-- Timestamps Row -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="detail-group mb-0">
+                      <div class="detail-label"><i class="bi bi-clock-history"></i> Created On</div>
+                      <div class="detail-value"><%= moment(obj.createdAt).format('MMMM Do YYYY, h:mm a') %> <small class="text-muted d-block mt-1" style="font-size: 0.8rem;"><%= moment(obj.createdAt).fromNow() %></small></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-group mb-md-0 mt-3 mt-md-0">
+                      <div class="detail-label"><i class="bi bi-arrow-repeat"></i> Last Updated</div>
+                      <div class="detail-value"><%= moment(obj.updatedAt).format('MMMM Do YYYY, h:mm a') %> <small class="text-muted d-block mt-1" style="font-size: 0.8rem;"><%= moment(obj.updatedAt).fromNow() %></small></div>
+                    </div>
+                </div>
+            </div>
 
-            <tr>
-              <th scope="row">Last Update</th>
-              <td><%= moment(obj.updatedAt).fromNow();  %></td>
-            </tr>
-          </tbody>
-        </table>
+          </div>
+        </div>
       </section>
     </main>
-    <script src="../js/bootstrap.bundle.min.js"></script>
 
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/sidebars.js"></script>
     <script src="../js/main.js"></script>
   </body>

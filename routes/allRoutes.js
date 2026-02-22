@@ -13,14 +13,11 @@ const upload = multer({ storage: multer.diskStorage({}) });
 router.get("*", checkIfUser);
 router.post("*", checkIfUser);
 
-// level3
 router.post(
   "/update-profile",
   upload.single("avatar"),
   authController.post_update_profile,
 );
-
-// Level 2
 
 router.get("/signout", authController.get_signout);
 
@@ -43,7 +40,7 @@ router.post(
 router.post("/login", authController.post_login);
 
 router.get("/", authController.get_welcome);
-// Level 1
+
 // GET Requst
 router.get("/home", requireAuth, userController.user_index_get);
 

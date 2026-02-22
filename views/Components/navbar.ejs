@@ -1,22 +1,104 @@
-<nav class="navbar bg-body-tertiary">
+<style>
+  /* 1. Navbar Container */
+  .custom-navbar {
+    background-color: rgba(15, 23, 42, 0.8); /* Dark semi-transparent base */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+  }
+
+  /* 2. Brand Styling */
+  .brand-text {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #42d5dd;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .brand-sup {
+    font-size: 0.6em; /* Slightly smaller superscript */
+    margin-left: 1px;
+  }
+
+  /* 3. Search Form */
+  .search-input {
+    background-color: rgba(30, 41, 59, 0.5);
+    border: 1px solid #334155;
+    color: #f1f5f9;
+    border-radius: 50px;
+    padding: 0.6rem 1.25rem;
+    transition: all 0.2s ease;
+  }
+
+  .search-input::placeholder {
+    color: #64748b;
+  }
+
+  .search-input:focus {
+    background-color: rgba(15, 23, 42, 0.8);
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    color: #fff;
+    outline: none;
+  }
+
+  /* 4. Search Button */
+  .btn-search {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
+  }
+
+  .btn-search:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
+    color: white;
+    filter: brightness(1.1);
+  }
+</style>
+
+<nav class="navbar custom-navbar">
   <div
     class="container-fluid justify-content-center justify-content-md-between"
   >
-    <a class="navbar-brand fw-medium fs-3 mb-1 mb-md-0">
-      U <sup>M</sup> System</a
+    <div>
+      <!-- في ملف navbar.ejs -->
+      <button
+        id="menuBtn"
+        class="btn btn-link text-white p-0 me-3 d-none"
+        onclick="toggleSidebar()"
+      >
+        <i class="bi bi-list fs-3"></i>
+      </button>
+      <!-- Brand -->
+      <a class="navbar-brand brand-text" href="/">
+        U <sup class="brand-sup">M</sup> System
+      </a>
+    </div>
+    <!-- Search Form -->
+    <form
+      action="/search"
+      method="post"
+      class="d-flex mt-3 mt-md-0"
+      role="search"
+      style="max-width: 400px; width: 100%"
     >
-
-    <form action="/search" method="post" class="d-flex" role="search">
       <input
-        class="form-control me-2"
+        class="form-control search-input me-2"
         name="searchText"
         type="search"
-        placeholder="Search"
+        placeholder="Search..."
         aria-label="Search"
       />
-      <button class="btn btn-outline-success" type="submit">
-        Search
-      </button>
+      <button class="btn btn-search" type="submit">Search</button>
     </form>
   </div>
 </nav>
